@@ -119,7 +119,6 @@ try {
         if ($originalWorkspace -ne $env:TF_WORKSPACE) {
             $env:TF_WORKSPACE = $originalWorkspace
             Invoke "terraform workspace new ${env:TF_WORKSPACE} || true"
-            Invoke "terraform workspace select ${env:TF_WORKSPACE}"
             Write-Host "Terraform workspace ${env:TF_WORKSPACE} selected"
         }
     }
