@@ -107,9 +107,21 @@ try {
         if ($Upgrade) {
             $initCmd += " -upgrade"
         }
-        Invoke "terraform workspace new priority"
+
+        # Strange behaviour with new workspaces, so we will init without a workspace, and then create a workspace afterwards
+        $originalWorkspace = $env:TF_WORKSPACE
+        $env:TF_WORKSPACE = ''
+
         Invoke "$initCmd" 
         Write-Host "Terraform Init complete"
+
+        # Strange behaviour with new workspaces, so we will init without a workspace, and then create a workspace afterwards
+        if ($originalWorkspace -ne $env:TF_WORKSPACE) {
+            $env:TF_WORKSPACE = $originalWorkspace
+            Invoke "terraform workspace new ${env:TF_WORKSPACE} || true"
+            Invoke "terraform workspace select ${env:TF_WORKSPACE}"
+            Write-Host "Terraform workspace ${env:TF_WORKSPACE} selected"
+        }
     }
 
     if ($Validate) {
