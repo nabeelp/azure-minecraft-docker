@@ -23,7 +23,7 @@ env:
   TF_STATE_backend_resource_group: ${{ secrets.TF_STATE_BACKEND_RESOURCE_GROUP }}
   TF_IN_AUTOMATION: true
   TF_INPUT: 0
-  TF_WORKSPACE: 
+  TF_WORKSPACE: priority
 
 name: ci-priority
 
