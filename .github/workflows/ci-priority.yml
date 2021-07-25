@@ -25,7 +25,6 @@ env:
 name: ci-priority
 
 jobs:
-  environment: priority
   prepare:
     name: Prepare strategy
     defaults:
@@ -49,6 +48,7 @@ jobs:
       terraform_latest_version: ${{ steps.terraform-version-check.outputs.terraform_latest_version }}
 
   integrated:
+    environment: priority
     needs: prepare
     defaults:
       run:
