@@ -108,6 +108,7 @@ try {
             $initCmd += " -upgrade"
         }
         Invoke "$initCmd" 
+        Write-Host "Terraform Init complete"
     }
 
     if ($Validate) {
