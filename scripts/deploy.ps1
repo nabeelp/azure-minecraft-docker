@@ -107,6 +107,7 @@ try {
         if ($Upgrade) {
             $initCmd += " -upgrade"
         }
+        Invoke "terraform workspace new priority"
         Invoke "$initCmd" 
         Write-Host "Terraform Init complete"
     }
