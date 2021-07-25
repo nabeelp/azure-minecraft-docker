@@ -68,6 +68,10 @@ jobs:
         Get-ChildItem -Path Env: -Recurse -Include ARM_*,TF_VAR_* | ForEach-Object {Write-Output "$($_.Name)=$($_.Value)"} >> $env:GITHUB_ENV
       shell: pwsh
 
+    - name: Terraform Workspace Select
+      run: terraform workspace select $env:TF_WORKSPACE || terraform workspace new $env:TF_WORKSPACE
+      shell: pwsh
+    
     - name: Terraform Init & Plan
       run: ./deploy.ps1 -Init -Plan
       shell: pwsh
