@@ -1,5 +1,12 @@
 on:
   push:
+    branches: [ deploy ]
+    paths-ignore:
+    - '**/README.md'
+    - '**/LICENSE'
+    - 'visuals/**'
+
+  pull_request:
     branches: [ main ]
     paths-ignore:
     - '**/README.md'
@@ -16,7 +23,7 @@ env:
   TF_STATE_backend_resource_group: ${{ secrets.TF_STATE_BACKEND_RESOURCE_GROUP }}
   TF_IN_AUTOMATION: true
   TF_INPUT: 0
-  TF_WORKSPACE: priority
+  TF_WORKSPACE: 
 
 name: ci-priority
 
