@@ -108,14 +108,19 @@ try {
             $initCmd += " -upgrade"
         }
 
-        # Strange behaviour with new workspaces, so we will init without a workspace, and then create a workspace afterwards
+        # 1. Due to an error occurring when the TF_WORKSPACE environment variable is set to something other than default 
+        # at the time of int, we temporarily clear the TF_WORKSPACE environment variable before init
+        Strange behaviour with new workspaces, so we will init without a workspace, and then create a workspace afterwards
         $originalWorkspace = $env:TF_WORKSPACE
         $env:TF_WORKSPACE = ''
 
+        # 2. Then we invoke init with a blank TF_WORKSPACE
         Invoke "$initCmd" 
         Write-Host "Terraform Init complete"
 
-        # Strange behaviour with new workspaces, so we will init without a workspace, and then create a workspace afterwards
+        # 3. Then, if the original value was not blank, we reset TF_WORKSPACE to the initial value, and then
+        # create the workspace, if required. No need to select the workspace if it already exists, as subsequent
+        # commands will reference the TF_WORKSPACE environment variable
         if ($originalWorkspace -ne $env:TF_WORKSPACE) {
             $env:TF_WORKSPACE = $originalWorkspace
             Invoke "terraform workspace new ${env:TF_WORKSPACE} || true"
