@@ -110,7 +110,6 @@ try {
 
         # 1. Due to an error occurring when the TF_WORKSPACE environment variable is set to something other than default 
         # at the time of int, we temporarily clear the TF_WORKSPACE environment variable before init
-        Strange behaviour with new workspaces, so we will init without a workspace, and then create a workspace afterwards
         $originalWorkspace = $env:TF_WORKSPACE
         $env:TF_WORKSPACE = ''
 
