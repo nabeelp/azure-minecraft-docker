@@ -21,7 +21,7 @@ minecraft_config               = {
       MOTD                     = "M AND N"
       OVERRIDE_SERVER_PROPERTIES = true # Use these settings over server.roperties every time the container starts
       SNOOPER_ENABLED          = "false"
-      TYPE                     = "VANILLA"
+      TYPE                     = "PAPER"
       VERSION                  = "1.17.1"
     }
 #    minecraft_server_port      = 25565
