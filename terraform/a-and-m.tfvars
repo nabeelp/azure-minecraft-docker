@@ -18,7 +18,7 @@ minecraft_config               = {
       MAX_PLAYERS              = 10
       MODS                     = null
       MODE                     = "survival"
-      MOTD                     = "N AND M"
+      MOTD                     = "A AND M"
       OVERRIDE_SERVER_PROPERTIES = true # Use these settings over server.roperties every time the container starts
       SNOOPER_ENABLED          = "false"
       TYPE                     = "PAPER"
@@ -63,6 +63,8 @@ minecraft_ops                  = [
 minecraft_users                = [
     "Genpai",
     "ProfTeaser",
+    "Andromedite",
+    "kiteson_mandela"
 ]
 # subscription_id                = "00000000-0000-0000-0000-000000000000"
 # tenant_id                      = "00000000-0000-0000-0000-000000000000"

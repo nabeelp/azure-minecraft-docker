@@ -16,25 +16,41 @@ env:
   TF_STATE_backend_resource_group: ${{ secrets.TF_STATE_BACKEND_RESOURCE_GROUP }}
   TF_IN_AUTOMATION: true
   TF_INPUT: 0
-  TF_WORKSPACE: n-and-m
+  TF_WORKSPACE: 
 
-name: ci-n-and-m
+name: ci-deploy
 
 # can we create a matrix on environment / workspace ... i.e. [n-and-m, a-and-m]?
 
 jobs:
   deploy:
-    environment: n-and-m
     defaults:
       run:
         working-directory: scripts
-    name: deploy
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        workspace:
+          - 'n-and-m'
+          - 'a-and-m'
+
+    name: deploy ${{ matrix.workspace }}
+    environment: ${{ matrix.workspace }}
 
     steps:
     - name: Checkout source
       uses: actions/checkout@v2
 
+    - name: Dump strategy context
+      env:
+        TF_WORKSPACE: ${{ matrix.workspace }}
+      run: |
+        Write-Host "Strategy context:"
+        $env:STRATEGY_CONTEXT | ConvertFrom-Json | Format-List
+        Write-Host "Matrix context:"
+        $env:MATRIX_CONTEXT   | ConvertFrom-Json | Format-List
+      shell: pwsh
+    
     - name: Use Azure CLI
       uses: azure/login@v1
       with:
