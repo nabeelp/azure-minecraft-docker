@@ -23,13 +23,15 @@ env:
   TF_STATE_backend_resource_group: ${{ secrets.TF_STATE_BACKEND_RESOURCE_GROUP }}
   TF_IN_AUTOMATION: true
   TF_INPUT: 0
-  TF_WORKSPACE: priority
+  TF_WORKSPACE: n-and-m
 
-name: ci-priority
+name: ci-n-and-m
+
+# can we create a matrix on environment / workspace ... i.e. [n-and-m, a-and-m]?
 
 jobs:
   deploy:
-    environment: priority
+    environment: n-and-m
     defaults:
       run:
         working-directory: scripts
