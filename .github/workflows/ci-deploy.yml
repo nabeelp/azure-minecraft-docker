@@ -20,8 +20,6 @@ env:
 
 name: ci-deploy
 
-# can we create a matrix on environment / workspace ... i.e. [n-and-m, a-and-m]?
-
 jobs:
   deploy:
     defaults:
@@ -29,6 +27,7 @@ jobs:
         working-directory: scripts
     runs-on: ubuntu-latest
     strategy:
+      max-parallel: 1
       matrix:
         workspace:
           - 'n-and-m'
@@ -63,6 +62,7 @@ jobs:
     - name: Prepare environment variables
       env:
         AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+        TF_WORKSPACE: ${{ matrix.workspace }}
       run: | 
         # Parse Azure secret into Terraform variables
         $servicePrincipal = ($env:AZURE_CREDENTIALS | ConvertFrom-Json)
@@ -95,6 +95,8 @@ jobs:
         npm i -g azure-functions-core-tools@3 --unsafe-perm true
         
     - name: Terraform Apply
+      env:
+        TF_WORKSPACE: ${{ matrix.workspace }}
       id: terraform-apply
       run: ./deploy.ps1 -Apply -Force -NoCode
       shell: pwsh
