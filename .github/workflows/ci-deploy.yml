@@ -108,6 +108,8 @@ jobs:
       shell: pwsh
 
     - name: Test connection to Minecraft Server
+      env:
+        TF_WORKSPACE: ${{ matrix.workspace }}
       run: | 
         Set-Location (Join-Path $env:GITHUB_WORKSPACE terraform) # Task does not support 'working-directory' property
         $minecraftConfig  = (terraform output -json minecraft | ConvertFrom-Json -AsHashtable)
