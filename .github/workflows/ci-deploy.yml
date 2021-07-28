@@ -84,6 +84,8 @@ jobs:
       shell: pwsh
 
     - name: Terraform Init & Plan
+      env:
+        TF_WORKSPACE: ${{ matrix.workspace }}
       run: ./deploy.ps1 -Init -Plan
       shell: pwsh
         
