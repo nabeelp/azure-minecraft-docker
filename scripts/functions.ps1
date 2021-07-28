@@ -183,8 +183,6 @@ function Get-TerraformOutput (
 function Get-TerraformWorkspace() {
     if ($env:TF_WORKSPACE) {
         Write-Debug "Get-TerraformWorkspace: $($env:TF_WORKSPACE)"
-        # select the workspace, or create if it does not already exist
-        terraform workspace select $env:TF_WORKSPACE || terraform workspace new $env:TF_WORKSPACE
         return $env:TF_WORKSPACE
     }
 
