@@ -46,9 +46,7 @@ jobs:
         TF_WORKSPACE: ${{ matrix.workspace }}
       run: |
         Write-Host "Strategy context:"
-        $env:STRATEGY_CONTEXT | ConvertFrom-Json | Format-List
-        Write-Host "Matrix context:"
-        $env:MATRIX_CONTEXT   | ConvertFrom-Json | Format-List
+        $env:TF_WORKSPACE | ConvertFrom-Json | Format-List
       shell: pwsh
     
     - name: Use Azure CLI
